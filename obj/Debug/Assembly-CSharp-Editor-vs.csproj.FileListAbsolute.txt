@@ -1,0 +1,16 @@
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Assembly-CSharp-Editor.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Assembly-CSharp-Editor.pdb
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Assembly-UnityScript.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Photon3Unity3D.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\UnityEditor.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\UnityEditor.Graphs.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\UnityEngine.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\nunit.framework.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\abloemenkamp\Documents\phantomTutorial\Temp\bin\Debug\Photon3Unity3D.xml
+C:\Users\abloemenkamp\Documents\phantomTutorial\obj\Debug\Assembly-CSharp-Editor-vs.csprojResolveAssemblyReference.cache
+C:\Users\abloemenkamp\Documents\phantomTutorial\obj\Debug\Assembly-CSharp-Editor.dll
+C:\Users\abloemenkamp\Documents\phantomTutorial\obj\Debug\Assembly-CSharp-Editor.pdb
