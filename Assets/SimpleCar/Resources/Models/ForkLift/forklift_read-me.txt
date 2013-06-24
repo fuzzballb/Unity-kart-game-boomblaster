@@ -1,0 +1,46 @@
+--------------------forklift; Read Me-------------------------
+
+//Contents.
+one very beat up forklift.
+Model is in its native .MAX format. Textures are in .TGA format, and include diffuse,specular and normal maps.
+Model is free for non-commercial use only, and are licensed under the Creative Commons Attribution-Non-commercial-No Derivative Works 3.0 License.
+
+//Details.
+the forklift is not rigged. the model is subdivided up into seperate elements within the mesh, so will not be hard to export in parts for animation through scripting, or to rig with bones for animation. 
+
+//Licence.
+
+This work is licensed under the Creative Commons Attribution-Non-commercial-No Derivative Works 3.0 License.
+
+You are free:
+
+    * to Share — to copy, distribute and transmit the work
+
+Under the following conditions:
+
+    *
+
+      Attribution. You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+    *
+
+      Non-commercial. You may not use this work for commercial purposes.
+    *
+
+      No Derivative Works. You may not alter, transform, or build upon this work.
+    *
+    * For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to this web page.
+    * Any of the above conditions can be waived if you get permission from the copyright holder.
+    * Nothing in this license impairs or restricts the author's moral rights.
+
+For further details of  the Creative Commons Attribution-Non-commercial-No Derivative Works 3.0 License, please visit this link;
+http://creativecommons.org/licenses/by-nc-nd/3.0/
+
+------------------------------------------------
+ammendment; model is banned in any console releases.
+------------------------------------------------
+
+//Contact.
+Contact me at “archangelstudio@gmail.com”, with any problems, comments or suggestions. 
+
+//acknowledgments.
+Thanks to Caroline Finn, Seosamh Gowran, Sean Whealan, all over at doom3world.org, and all on the ogre3d forum. Also thanks to Jacob and david over on sharecg.com. thanks to my friends on deviantart.com, and thanks to you for using my work fairly, and I wish you best of luck with your projects. Especially if you have read this far.

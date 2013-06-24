@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\SingleMatch.cs">
+    <Files>
+      <File FileName="Assets\Plugins\PhotonNetwork\PhotonNetwork.cs" Line="1346" Column="1" />
+      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="56" Column="5" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

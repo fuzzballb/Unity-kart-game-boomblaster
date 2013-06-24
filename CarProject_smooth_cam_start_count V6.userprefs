@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Photon Unity Networking\SimpleCar\Code-Bullet\BulletAi.cs">
+    <Files>
+      <File FileName="Assets\Photon Unity Networking\SimpleCar\RandomMatchmakerCar.cs" Line="34" Column="3" />
+      <File FileName="Assets\Photon Unity Networking\SimpleCar\Code-Bullet\BulletAi.cs" Line="45" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
