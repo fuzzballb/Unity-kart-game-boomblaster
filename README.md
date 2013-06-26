@@ -5,7 +5,7 @@ MarioKart(R) type game made in Unity 4 free. Based on the best game experiance e
 
 IMPORTANT!
 
-Since Unity uses Blender to load the Blender files in to Unity, be shure to install Blender firt, before opening this project
+Since Unity uses Blender to load the Blender files in to Unity, be shure to install Blender first.
 
 http://www.blender.org/
 
