@@ -49,6 +49,10 @@ public class SingleMatch : Photon.MonoBehaviour {
 		ShootEnemy ShootControlerEnemy = SimpleAICharacter.GetComponent<ShootEnemy>();
 		ShootControlerEnemy.enabled = true;
 		
+		
+		// Add a PickUp
+		var pickup1 = PhotonNetwork.Instantiate("PickUpfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
+
 		// Add an AI character to the room
 		//GameObject SimpleAICharacter2 = PhotonNetwork.Instantiate("SimpleAICharacterfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
 		//RAINAgent AIController2 = SimpleAICharacter2.GetComponent<RAINAgent>();

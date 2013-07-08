@@ -1,10 +1,16 @@
 using UnityEngine;
 using System.Collections;
 
-public class DestroyOnInvisible : MonoBehaviour {
+public class DestroyOnInvisible : Photon.MonoBehaviour {
 	
 	// TODO: Destroy object when set to invisible
 	void OnBecameInvisible() {
-		PhotonNetwork.Destroy(gameObject);
+		
+		PhotonView myPhotonView = PhotonView.Get(gameObject);
+		
+		if(myPhotonView.isMine)
+		{
+			PhotonNetwork.Destroy(gameObject);
+		}
 	}
 }

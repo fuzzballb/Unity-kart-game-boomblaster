@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using RAIN.Core;
 
 public class ShootEnemy : MonoBehaviour {
 	
@@ -22,18 +23,33 @@ public class ShootEnemy : MonoBehaviour {
 		{
 			// Get all human players
 			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
+			
+			RAINAgent ai = gameObject.GetComponent<RAINAgent>();
+			
+			
+			//ai.Agent.actionContext.SetContextItem<int>("ammo", ai.Agent.actionContext.GetContextItem<int>("ammo")-1);
+			
+			
 			foreach(GameObject player in players)
 			{
 				var targetDir = player.transform.position - transform.position;
 		        var forward = transform.forward;
 		        var angle = Vector3.Angle(targetDir, forward);
-		        if (angle < 5.0)
+				
+				// Get ammo count from AI
+				int ammo = ai.Agent.actionContext.GetContextItem<int>("ammo");
+				
+		        if (angle < 5.0 && ammo > 0)
 				{
 					GameObject bullet = PhotonNetwork.Instantiate("BomfabEnemy", transform.position + (spawnDistanceForward * transform.forward)+ (spawnDistanceUp * transform.up),transform.rotation, 0);
 					BulletAi controller = bullet.GetComponent<BulletAi>();
 					controller.enabled = true;
 					tempReloadTime = reloadTime;
+					
+					Debug.Log( "AI ammo " + ammo);
+					// Set ammo count to AI
+					ai.Agent.actionContext.SetContextItem<int>("ammo", ammo-1);
+					
 				}
 			}
 		}
