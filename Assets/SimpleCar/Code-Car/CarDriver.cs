@@ -20,6 +20,9 @@ public class CarDriver : MonoBehaviour {
 		// Add player to score dictionary using RPC call
 		PhotonView photonView = PhotonView.Get(this);
 		photonView.RPC("AddPlayer", PhotonTargets.AllBuffered , PhotonNetwork.player.ID, 10);
+		
+		rigidbody.centerOfMass = new Vector3(0,-2,0);
+		
 	}
 	
 	[RPC]
