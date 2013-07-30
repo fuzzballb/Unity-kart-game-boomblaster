@@ -1,0 +1,1 @@
+// This class got outdated. As updates from the Asset Store won't delete files, this is emptied.

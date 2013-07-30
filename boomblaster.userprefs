@@ -1,5 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\Code-Bullet\DestroyOnInvisible.cs">
+    <Files>
+      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Car\CarDriver.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Bullet\BulletAi.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Level\ColliderPickUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Bullet\DestroyOnInvisible.cs" Line="10" Column="90" />
+      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs" Line="1496" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\abloemenkamp\Documents\GitHub\boomblaster\Assets\SimpleCar\SingleMatch.cs" line="48" />
+    </BreakpointStore>
+=======
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\Code-Car\CarDriver.cs">
     <Files>
       <File FileName="Assets\SimpleCar\Code-Car\CarDriver.cs" Line="19" Column="17" />
@@ -11,6 +27,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
+>>>>>>> 7d67febb83d0ea240f71160f8e087db448012110
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

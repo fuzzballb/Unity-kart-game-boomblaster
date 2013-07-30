@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{C75FAAD5-2B64-5289-7EED-DDA7D7148216}</ProjectGuid>
+	<ProjectGuid>{8F212DDE-72A6-E83B-8BA6-4BBE1962D705}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_METRO;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_WINRT;ENABLE_WEBCAM;RENDER_SOFTWARE_CURSOR;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_SERIALIZATION_BY_CODEGENERATION;ENABLE_CLOTH;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_2_0;UNITY_4_2;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;ENABLE_DUCK_TYPING</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_2_0;UNITY_4_2;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -37,7 +37,7 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/PlaybackEngines/MetroSupport/Tools/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
@@ -46,9 +46,8 @@
   <ItemGroup>
      <Compile Include="Assets\RAIN\Editor\ScriptTemplates\ActionTemplate_BOO.boo" />
      <None Include="Assets\AI\Resources\BehaviorTrees\simplemove.xml" />
-     <None Include="Assets\Plugins\PhotonNetwork\library\Photon3Unity3D.xml" />
+     <None Include="Assets\Photon Unity Networking\readme.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\Plugins\PhotonNetwork\library\release_history.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\SimpleCar\Resources\Models\ForkLift\forklift_read-me.txt" />
      <None Include="Assets\readme.txt" />
@@ -56,10 +55,10 @@
      <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\changelog.txt" />
  <Reference Include="Newtonsoft.Json">
- <HintPath>Assets\Editor\PhotonNetwork\Newtonsoft.Json.dll</HintPath>
+ <HintPath>Assets\Photon Unity Networking\Editor\PhotonNetwork\Newtonsoft.Json.dll</HintPath>
  </Reference>
- <Reference Include="Photon3Unity3D">
- <HintPath>Assets\Plugins\PhotonNetwork\library\Photon3Unity3D.dll</HintPath>
+ <Reference Include="Photon3Win8RT">
+ <HintPath>Assets\Plugins\Photon3Win8RT.dll</HintPath>
  </Reference>
  <Reference Include="RAINIndie">
  <HintPath>Assets\RAIN\RAINIndie.dll</HintPath>
@@ -94,9 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{23A15AD7-FBC8-D8EE-2CB7-F14E22110F54}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{7FF1D14E-C902-DF8B-E3B9-B783F0BB5D3B}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{4D488158-D26D-CBFC-3369-3080FC565E44}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
