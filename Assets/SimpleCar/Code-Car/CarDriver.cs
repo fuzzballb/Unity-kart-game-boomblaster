@@ -134,7 +134,7 @@ public class CarDriver : MonoBehaviour {
 	      transform.eulerAngles = new Vector3(a.x, rotation, a.z);
 		}
 	 
-	   Vector3 moveDirection = new Vector3(0,0,verticalInput*100.0f);
+	   Vector3 moveDirection = new Vector3(0,0,verticalInput*forwardSpeed);
 	 
 	   if(verticalInput > 0.1)
 	   {
