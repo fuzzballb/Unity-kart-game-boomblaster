@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using RAIN.Core;
 
 public class BulletAi : Photon.MonoBehaviour {
 	
@@ -32,8 +33,19 @@ public class BulletAi : Photon.MonoBehaviour {
 			// destroy the bullet
 			PhotonNetwork.Destroy(gameObject);
 			
-			var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
-			other.gameObject.transform.position = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position;
+			
+			// destroy enemy game object, this is no problem for single player game
+			PhotonNetwork.Destroy(other.gameObject);
+
+			
+			
+			
+			// Create new enemy game object	
+			Debug.Log("starting coroutine in main script");
+			SingleMatch rb = GameObject.Find("Scripts").GetComponent<SingleMatch>();
+			rb.CreateNewAI();
+			
+			//other.gameObject.transform.position = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position;
 
 			if(Application.loadedLevelName.Equals("SinglePlayer"))
 			{
@@ -133,4 +145,9 @@ public class BulletAi : Photon.MonoBehaviour {
 		}
 		return false;
 	}
+	
+	
+	
+
+	
 }

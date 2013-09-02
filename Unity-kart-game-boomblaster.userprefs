@@ -1,15 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\Code-Bullet\DestroyOnInvisible.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\SingleMatch.cs">
     <Files>
-      <File FileName="Assets\SimpleCar\Code-Bullet\DestroyOnInvisible.cs" Line="7" Column="28" />
-      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="1" Column="1" />
-      <File FileName="Assets\SimpleCar\Code-Enemy\ShootEnemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="53" Column="2" />
+      <File FileName="Assets\SimpleCar\Code-Bullet\BulletAi.cs" Line="128" Column="5" />
+      <File FileName="Assets\SimpleCar\Code-Enemy\ShootEnemy.cs" Line="44" Column="6" />
       <File FileName="Assets\SimpleCar\Code-Level\ColliderPickUp.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\abloemenkamp\Documents\GitHub\Unity-kart-game-boomblaster\Assets\SimpleCar\Code-Level\ColliderPickUp.cs" line="68" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

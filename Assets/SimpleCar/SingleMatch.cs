@@ -7,10 +7,14 @@ public class SingleMatch : Photon.MonoBehaviour {
 	public static int playerScore = 0;
 	public static int enemyScore = 0;
 	
+	public static int currentEnemyPlayers = 1;
+	public static int desiredAmountOfEnemyPlayers = 1;
+	
 	// Use this for initialization
 	void Start () {
+		
+		PhotonNetwork.offlineMode = true;
 		PhotonNetwork.ConnectUsingSettings("0.2");
-		//PhotonNetwork.offlineMode = true;
 	}
 	
 	// Update is called once per frame
@@ -42,23 +46,57 @@ public class SingleMatch : Photon.MonoBehaviour {
 		Shoot ShootControler = car.GetComponent<Shoot>();
 		ShootControler.enabled = true;
 		
-		// Add an AI character to the room
+		StartCoroutine(WaitAndCreateAI(4.0f));
+		
+		// Add a PickUp
+		var pickup1 = PhotonNetwork.Instantiate("PickUpfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
+	
+	
+		StartCoroutine(GoToNextLevel(10.0f));
+			
+	}
+	
+	IEnumerator GoToNextLevel(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+		
+		// level up, add an extra AI player
+		desiredAmountOfEnemyPlayers++;
+		
+		GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + desiredAmountOfEnemyPlayers;
+		
+		
+		
+	}
+	
+	public void CreateNewAI()
+	{
+		currentEnemyPlayers--;
+		
+		while(currentEnemyPlayers < desiredAmountOfEnemyPlayers)
+		{
+			currentEnemyPlayers++;
+			StartCoroutine(WaitAndCreateAI(4.0f));
+		}
+	}
+	
+	
+	IEnumerator WaitAndCreateAI(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+		
+		Debug.Log("start create new AI");
+		
+		var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
+					
 		GameObject SimpleAICharacter = PhotonNetwork.Instantiate("SimpleAICharacterfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
 		RAINAgent AIController = SimpleAICharacter.GetComponent<RAINAgent>();
 		AIController.enabled = true;
 		ShootEnemy ShootControlerEnemy = SimpleAICharacter.GetComponent<ShootEnemy>();
 		ShootControlerEnemy.enabled = true;
 		
+		Debug.Log("done create new AI");
 		
-		// Add a PickUp
-		var pickup1 = PhotonNetwork.Instantiate("PickUpfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
-
-		// Add an AI character to the room
-		//GameObject SimpleAICharacter2 = PhotonNetwork.Instantiate("SimpleAICharacterfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
-		//RAINAgent AIController2 = SimpleAICharacter2.GetComponent<RAINAgent>();
-		//AIController2.enabled = true;
-		//ShootEnemy ShootControlerEnemy2 = SimpleAICharacter2.GetComponent<ShootEnemy>();
-		//ShootControlerEnemy2.enabled = true;
+		
 	}
+	
 	
 }

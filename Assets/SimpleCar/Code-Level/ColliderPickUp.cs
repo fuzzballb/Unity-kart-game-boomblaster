@@ -30,7 +30,7 @@ public class ColliderPickUp : MonoBehaviour {
 			// Reset the senses of the AI, after Decoration en Entity are removed
 			// to make shure the AI agent isn't holding a lock on the object
 			RAINAgent ai = other.transform.parent.gameObject.GetComponent<RAINAgent>();
-			ai.Agent.Mind.BeginSense();
+		//	ai.Agent.Mind.BeginSense();
 			
 			// add Ammo to the AI character
 			ai.Agent.actionContext.SetContextItem<int>("ammo", ammo);
@@ -53,13 +53,12 @@ public class ColliderPickUp : MonoBehaviour {
 			
 			// Reset the senses of the AI, after Decoration en Entity are removed
 			// to make shure the AI agent isn't holding a lock on the object
-			RAINAgent ai = GameObject.FindGameObjectWithTag("Enemy").GetComponent<RAINAgent>();
-			ai.Agent.Mind.BeginSense();
+		//	RAINAgent ai = GameObject.FindGameObjectWithTag("Enemy").GetComponent<RAINAgent>();
+		//	ai.Agent.Mind.BeginSense();
 			
 			
 			// destroy the game object after 0.2f seconds, zo the AI is done refreshing senses
 			StartCoroutine(WaitAndDestroy(0.3f));
-			
 		}
 		
     }
@@ -72,16 +71,6 @@ public class ColliderPickUp : MonoBehaviour {
 		var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		var pickup1 = PhotonNetwork.Instantiate("PickUpfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
 	
-		StartCoroutine(WaitAndUpdateMind(0.5f));	
+		//StartCoroutine(WaitAndUpdateMind(0.5f));	
 	}
-	
-	
-	IEnumerator WaitAndUpdateMind(float waitTime) {
-    	yield return new WaitForSeconds(waitTime);
-		
-		// update IA senses to notice the new pickup
-		RAINAgent ai = GameObject.FindGameObjectWithTag("Enemy").GetComponent<RAINAgent>();
-		ai.Agent.Mind.BeginSense();
-	}
-	
 }
