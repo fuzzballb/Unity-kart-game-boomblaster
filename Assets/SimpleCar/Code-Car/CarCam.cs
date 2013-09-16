@@ -6,6 +6,7 @@ public class CarCam : MonoBehaviour {
 	public Transform trackObject;
 	private Vector3 camDistance;
 	private Quaternion camRotation;
+	private Transform _transform;
 
 	
 	public float height;
@@ -14,7 +15,7 @@ public class CarCam : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		_transform = Camera.mainCamera.transform;
 	}
 	
 	// Update is called once per frame
@@ -23,9 +24,9 @@ public class CarCam : MonoBehaviour {
 		
 		// Matrix Rotation done before position
 		var newPosition = Quaternion.Euler(-65.0f,trackObject.rotation.eulerAngles.y,0.0f) * camDistance + trackObject.position;
-		Camera.mainCamera.transform.position = Vector3.Lerp(Camera.mainCamera.transform.position, newPosition, 4.0f*Time.deltaTime);
+		_transform.position = Vector3.Lerp(_transform.position, newPosition, 4.0f*Time.deltaTime);
 		
 		// Always look at the target
-    	Camera.mainCamera.transform.LookAt(trackObject);
+    	_transform.LookAt(trackObject);
 	}
 }

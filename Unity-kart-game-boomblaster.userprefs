@@ -1,8 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\RandomMatchmakerCar.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\SingleMatch.cs">
     <Files>
       <File FileName="Assets\SimpleCar\RandomMatchmakerCar.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Bullet\BulletAi.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Bullet\DestroyOnInvisible.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Car\Shoot.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Code-Car\CarDriver.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="17" Column="45" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

@@ -8,7 +8,7 @@ public class CarDriver : MonoBehaviour {
 	
 	public float timeToReappear = 100.0f;
 	public static bool playerShot = false;
-	
+	private Transform _transform;
 	
 	public Transform lowestGroudObject;
 	public Transform respawnPosition;
@@ -24,6 +24,7 @@ public class CarDriver : MonoBehaviour {
 		
 		rigidbody.centerOfMass = new Vector3(0,-2,0);
 		
+		_transform = transform;
 	}
 	
 	
@@ -97,10 +98,10 @@ public class CarDriver : MonoBehaviour {
 		// Check if jump key (SPACEBAR) is pressed to reset player to default position
 		
 		if(Input.GetButtonDown("Fire1")){
-			transform.position += Vector3.up;
+			_transform.position += Vector3.up;
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.angularVelocity = Vector3.zero;
-			transform.rotation = Quaternion.identity;
+			_transform.rotation = Quaternion.identity;
 		}
 		
 		
@@ -144,7 +145,7 @@ public class CarDriver : MonoBehaviour {
 	   float horizontalInput = Input.GetAxis("Horizontal");
 	   float verticalInput = Input.GetAxis("Vertical");
 	 
-	   Vector3 a = transform.eulerAngles;
+	   Vector3 a = _transform.eulerAngles;
 	 
 	   float rotation= 0; 
 		
@@ -152,21 +153,29 @@ public class CarDriver : MonoBehaviour {
 		{
 	      rotation= a.y + (10.0f  * Time.deltaTime * 10);
 			
-	      transform.eulerAngles = new Vector3(a.x, rotation, a.z);
+	      _transform.eulerAngles = new Vector3(a.x, rotation, a.z);
 		}
 	   else if(horizontalInput < 0)
 		{
 		  rotation= a.y - (10.0f  * Time.deltaTime * 10);	
-	      transform.eulerAngles = new Vector3(a.x, rotation, a.z);
+	      _transform.eulerAngles = new Vector3(a.x, rotation, a.z);
 		}
 	 
 	   Vector3 moveDirection = new Vector3(0,0,verticalInput*forwardSpeed);
 	 
-
+		
+		
+		
+		//Debug.Log(" x " +  transform.rotation.x + " y " +  transform.rotation.y + " z " +  transform.rotation.z  );
+		
 		
 	   if(verticalInput > 0.1)
 	   {
-	      rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
+
+			if(_transform.rotation.x < 0.05f && _transform.rotation.x > -0.05f && _transform.rotation.z < 0.05f && _transform.rotation.z > -0.05f)
+			{
+	      		rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
+			}
 	   }
 
 
@@ -230,7 +239,7 @@ public class CarDriver : MonoBehaviour {
 		   	   rigidbody.AddRelativeForce(guiMoveDirection,ForceMode.Acceleration);
 		   	}
 	
-			transform.eulerAngles = new Vector3(a.x, guiRotation, a.z);
+			_transform.eulerAngles = new Vector3(a.x, guiRotation, a.z);
 		}
 		
 	}

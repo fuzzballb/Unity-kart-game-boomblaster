@@ -9,9 +9,13 @@ public class ShootEnemy : MonoBehaviour {
 	public float spawnDistanceUp = 1.0f;
 	public float reloadTime = 50.0f;
 	private float tempReloadTime = 0.0f;
+	private Transform _transform;
+	
 	// Use this for initialization
 	void Start () {
 		tempReloadTime	=	reloadTime;
+		
+		_transform = transform;
 	}
 	
 	// Update is called once per frame
@@ -32,8 +36,8 @@ public class ShootEnemy : MonoBehaviour {
 			
 			foreach(GameObject player in players)
 			{
-				var targetDir = player.transform.position - transform.position;
-		        var forward = transform.forward;
+				var targetDir = player.transform.position - _transform.position;
+		        var forward = _transform.forward;
 		        var angle = Vector3.Angle(targetDir, forward);
 				
 				// Get ammo count from AI
@@ -42,7 +46,7 @@ public class ShootEnemy : MonoBehaviour {
 		        if (angle < 5.0 && ammo > 0)
 				{
 					
-					GameObject bullet = PhotonNetwork.Instantiate("BomfabEnemy", transform.position + (spawnDistanceForward * transform.forward)+ (spawnDistanceUp * transform.up),transform.rotation, 0);
+					GameObject bullet = PhotonNetwork.Instantiate("BomfabEnemy", _transform.position + (spawnDistanceForward * _transform.forward)+ (spawnDistanceUp * _transform.up),_transform.rotation, 0);
 					BulletAi controller = bullet.GetComponent<BulletAi>();
 					controller.enabled = true;
 					
