@@ -13,7 +13,8 @@ public class CarDriver : MonoBehaviour {
 	public Transform lowestGroudObject;
 	public Transform respawnPosition;
 	
-	
+	private float guiRotation= 0;  
+	private float guiVerticalInput = 0.0f;
 	
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,24 @@ public class CarDriver : MonoBehaviour {
 		rigidbody.centerOfMass = new Vector3(0,-2,0);
 		
 	}
+	
+	
+	
+	void OnGUI () {
+		
+		// Make a background box
+	#if UNITY_METRO
+		GUI.Box(new Rect(10,950,Screen.width/3,100), "");
+		GUI.Box(new Rect(1700,950,160,100), "");
+	#endif	
+
+		
+
+		
+	}
+	
+	
+	
 	
 	[RPC]
 	void AddPlayer(int playerID, int startScore ,PhotonMessageInfo info)
@@ -76,12 +95,14 @@ public class CarDriver : MonoBehaviour {
 		}
 		
 		// Check if jump key (SPACEBAR) is pressed to reset player to default position
-		if(Input.GetButtonDown("Jump")){
+		
+		if(Input.GetButtonDown("Fire1")){
 			transform.position += Vector3.up;
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.angularVelocity = Vector3.zero;
 			transform.rotation = Quaternion.identity;
 		}
+		
 		
 		// Update audio according to the speed of the player
 		audio.pitch = rigidbody.velocity.magnitude / 80 +1;
@@ -91,6 +112,11 @@ public class CarDriver : MonoBehaviour {
 		{
 			Application.Quit ();
 		}
+		
+		
+		
+		
+		
 	}
 	
  
@@ -136,10 +162,77 @@ public class CarDriver : MonoBehaviour {
 	 
 	   Vector3 moveDirection = new Vector3(0,0,verticalInput*forwardSpeed);
 	 
+
+		
 	   if(verticalInput > 0.1)
 	   {
 	      rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
 	   }
+
+
+		if (  Application.platform == RuntimePlatform.MetroPlayerX64 ||
+         Application.platform == RuntimePlatform.MetroPlayerX86 ||
+         Application.platform == RuntimePlatform.MetroPlayerARM)
+		{
+			Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height * 1.0f);
+			Rect joystickRectRight = new Rect(Screen.width/2, 0, Screen.width/2, Screen.height * 1.0f);
+			
+	
+			    // do joystick stuff
+				int count  = Input.touchCount;
+				
+			
+				//GUILayout.Label("fingers on screen" + count.ToString());
+			
+				// check all fingers
+				for (var i = 0;  i < count;  i++)
+				{  
+					Touch touch = Input.GetTouch(i);
+					
+					// if joystick finger
+				
+					// How ON earth does this touch zone start in the top right corner ????
+					if(joystickRect.Contains(touch.position))
+					{
+					
+						//GUILayout.Label("fingerposition" + touch.position.ToString());
+					
+						// and finger has moved
+						if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+						{
+							if(touch.position.x < Screen.width/3)
+							{
+								// 210 (touch.position.x)  - (1800/2)/2 (450) = 10 
+								float turnAmount = touch.position.x - ((Screen.width/3)/2);
+								guiRotation = a.y + ((turnAmount/4) * Time.deltaTime);	
+							}
+						}
+					}
+					else if(joystickRectRight.Contains(touch.position))
+					{	
+						//GUILayout.Label("fingerposition" + touch.position.ToString());
+					
+						if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+						{
+							guiVerticalInput = 1.0f;
+						}
+						else
+						{
+							guiVerticalInput = 0.0f;
+						}
+					}
+				}
+	
+	
+			Vector3 guiMoveDirection = new Vector3(0,0,guiVerticalInput*forwardSpeed);
+		   	if(guiVerticalInput > 0.1)
+		   	{
+		   	   rigidbody.AddRelativeForce(guiMoveDirection,ForceMode.Acceleration);
+		   	}
+	
+			transform.eulerAngles = new Vector3(a.x, guiRotation, a.z);
+		}
+		
 	}
 	
 }

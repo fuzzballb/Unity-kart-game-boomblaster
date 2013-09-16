@@ -9,11 +9,11 @@ public class DestroyOnInvisible : Photon.MonoBehaviour {
 		// Code needs to be updated, this code causes framerate problems when generating errors
 		//
 		
-		//PhotonView myPhotonView = PhotonView.Get(gameObject);
-		//if(myPhotonView.isMine)
-		//{
-		//	PhotonNetwork.Destroy(gameObject);
-		//}
+		PhotonView myPhotonView = PhotonView.Get(gameObject);
+		if(myPhotonView.isMine)
+		{
+			PhotonNetwork.Destroy(gameObject);
+		}
 
 	}
 }

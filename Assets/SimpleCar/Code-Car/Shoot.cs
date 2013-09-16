@@ -22,7 +22,7 @@ public class Shoot : MonoBehaviour {
 		
 		if(tempReloadTime < 0.0f)
 		{
-			if(Input.GetButton("Fire1"))
+			if(Input.GetButton("Jump"))
 			{
 				GameObject bullet = PhotonNetwork.Instantiate("Bomfab", transform.position + (spawnDistanceForward * transform.forward)+ (spawnDistanceUp * transform.up),transform.rotation, 0);
 				BulletAi controller = bullet.GetComponent<BulletAi>();
