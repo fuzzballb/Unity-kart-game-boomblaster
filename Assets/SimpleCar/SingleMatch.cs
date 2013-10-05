@@ -13,8 +13,10 @@ public class SingleMatch : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		PhotonNetwork.offlineMode = true;
+		
 		PhotonNetwork.ConnectUsingSettings("0.2");
+		//PhotonNetwork.offlineMode = true;
+		
 	}
 	
 	// Update is called once per frame
@@ -24,11 +26,13 @@ public class SingleMatch : Photon.MonoBehaviour {
 	
 	void OnJoinedLobby()
 	{
+
 		PhotonNetwork.JoinRandomRoom();
 	}
 	
 	void OnPhotonRandomJoinFailed()
 	{
+
 		PhotonNetwork.CreateRoom(null, false, false, 1);  // no name (gets a guid), invisible and closed with 1 players max
 	}
 	

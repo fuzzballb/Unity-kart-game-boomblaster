@@ -10,7 +10,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+	GameObject.Find("Loading").renderer.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -51,6 +51,9 @@ public class NewBehaviourScript : MonoBehaviour {
 			{
 				Color clr = new Color(0, 1, 1, 1);
 				hit.collider.renderer.material.SetColor("_Color", clr);
+				
+				GameObject.Find("Loading").renderer.enabled = true;
+				
 				
 				Application.LoadLevel(selectedSceneName);
 				selection = false;

@@ -9,6 +9,12 @@ public class CarDriver : MonoBehaviour {
 	public float timeToReappear = 100.0f;
 	public static bool playerShot = false;
 	private Transform _transform;
+	private Rigidbody _rigidbody;
+	private ChangeTextureKart _ChangeTextureKart;
+	private ChangeTextureKart _MarioModel;
+	private ChangeTextureHelmet _HelmetModel;
+	
+	
 	
 	public Transform lowestGroudObject;
 	public Transform respawnPosition;
@@ -16,13 +22,28 @@ public class CarDriver : MonoBehaviour {
 	private float guiRotation= 0;  
 	private float guiVerticalInput = 0.0f;
 	
+	
+	
+	public float reloadTime = 10.0f;
+	private float tempReloadTime = 0.0f;
+	public float spawnDistanceForward = 12.0f; // don't want the bullet spawn in centre
+	public float spawnDistanceUp = 6.0f;
+	
 	// Use this for initialization
 	void Start () {
 		// Add player to score dictionary using RPC call
 		PhotonView photonView = PhotonView.Get(this);
 		photonView.RPC("AddPlayer", PhotonTargets.AllBuffered , PhotonNetwork.player.ID, 10);
 		
-		rigidbody.centerOfMass = new Vector3(0,-2,0);
+		_rigidbody = rigidbody;
+		
+		_rigidbody.centerOfMass = new Vector3(0,-2,0);
+		
+		
+		_ChangeTextureKart = GameObject.FindGameObjectWithTag("PlayerKartModel").GetComponent<ChangeTextureKart>();
+		_MarioModel = GameObject.FindGameObjectWithTag("PlayerKartModel").GetComponent<ChangeTextureKart>();
+		_HelmetModel = GameObject.FindGameObjectWithTag("HelmetModel").GetComponent<ChangeTextureHelmet>();
+		
 		
 		_transform = transform;
 	}
@@ -31,15 +52,38 @@ public class CarDriver : MonoBehaviour {
 	
 	void OnGUI () {
 		
+	//	float horizRatio = Screen.width / 1024.0f;
+	//	float vertRatio = Screen.height / 768.0f;
+	//	var tOffset = new Vector3 (0, 0, 0);
+	//	var tRotation = Quaternion.identity;
+	//	var tScale = new Vector3(horizRatio, vertRatio, 1.0f);
+	//	var tMatrix = Matrix4x4.TRS(tOffset, tRotation, tScale);
+	//	GUI.matrix = tMatrix;
+
+		
 		// Make a background box
 	#if UNITY_METRO
-		GUI.Box(new Rect(10,950,Screen.width/3,100), "");
-		GUI.Box(new Rect(1700,950,160,100), "");
+		
+		
+		
+		
+	//	Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height * 1.0f);
+	//	Rect joystickRectRight = 		new Rect(Screen.width - (Screen.width/3), 0, 			   Screen.width/3, Screen.height/2);
+	//	Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/2);
+			
+	//	GUI.Box(joystickRect, "");
+	//	GUI.Box(joystickRectRight, "");
+	//	GUI.Box(joystickRectRightFire, "");
+		
+		//GUI.Box(new Rect(10,950,Screen.width/3,100), "");
+		//GUI.Box(new Rect(1700,950,160,100), "");
 	#endif	
 
 		
 
 		
+		
+
 	}
 	
 	
@@ -54,16 +98,16 @@ public class CarDriver : MonoBehaviour {
 	
 	private void SetPlayerToTransperant()
 	{
-		GameObject.FindGameObjectWithTag("PlayerKartModel").GetComponent<ChangeTextureKart>().makeTransparant(true);
-		GameObject.FindGameObjectWithTag("MarioModel").GetComponent<ChangeTextureMario>().makeTransparant(true);
-		GameObject.FindGameObjectWithTag("HelmetModel").GetComponent<ChangeTextureHelmet>().makeTransparant(true);
+		_ChangeTextureKart.makeTransparant(true);
+		_MarioModel.makeTransparant(true);
+		_HelmetModel.makeTransparant(true);
 	}
 	
 	private void SetPlayerToOpage()
 	{
-		GameObject.FindGameObjectWithTag("PlayerKartModel").GetComponent<ChangeTextureKart>().makeTransparant(false);
-		GameObject.FindGameObjectWithTag("MarioModel").GetComponent<ChangeTextureMario>().makeTransparant(false);
-		GameObject.FindGameObjectWithTag("HelmetModel").GetComponent<ChangeTextureHelmet>().makeTransparant(false);
+		_ChangeTextureKart.makeTransparant(false);
+		_MarioModel.makeTransparant(false);
+		_HelmetModel.makeTransparant(false);
 	}
 	
 	// Update is called once per frame
@@ -96,17 +140,22 @@ public class CarDriver : MonoBehaviour {
 		}
 		
 		// Check if jump key (SPACEBAR) is pressed to reset player to default position
-		
-		if(Input.GetButtonDown("Fire1")){
-			_transform.position += Vector3.up;
-			rigidbody.velocity = Vector3.zero;
-			rigidbody.angularVelocity = Vector3.zero;
-			_transform.rotation = Quaternion.identity;
+		/*
+		if (  Application.platform != RuntimePlatform.MetroPlayerX64 ||
+         Application.platform != RuntimePlatform.MetroPlayerX86 ||
+         Application.platform != RuntimePlatform.MetroPlayerARM)
+		{
+			if(Input.GetButtonDown("Fire1")){
+				_transform.position += Vector3.up;
+				rigidbody.velocity = Vector3.zero;
+				rigidbody.angularVelocity = Vector3.zero;
+				_transform.rotation = Quaternion.identity;
+			}
 		}
-		
+		*/
 		
 		// Update audio according to the speed of the player
-		audio.pitch = rigidbody.velocity.magnitude / 80 +1;
+		audio.pitch = _rigidbody.velocity.magnitude / 80 +1;
 		
 		// Check if ESC key is pressed to leave game
 		if(Input.GetKey(KeyCode.Escape))
@@ -174,69 +223,90 @@ public class CarDriver : MonoBehaviour {
 
 			if(_transform.rotation.x < 0.05f && _transform.rotation.x > -0.05f && _transform.rotation.z < 0.05f && _transform.rotation.z > -0.05f)
 			{
-	      		rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
+	      		_rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
 			}
 	   }
 
+		
+		
+				// Cool downs for Player weapon
+			tempReloadTime -= 10.0f * Time.deltaTime;
+		
+		
 
 		if (  Application.platform == RuntimePlatform.MetroPlayerX64 ||
          Application.platform == RuntimePlatform.MetroPlayerX86 ||
          Application.platform == RuntimePlatform.MetroPlayerARM)
 		{
 			Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height * 1.0f);
-			Rect joystickRectRight = new Rect(Screen.width/2, 0, Screen.width/2, Screen.height * 1.0f);
-			
-	
-			    // do joystick stuff
-				int count  = Input.touchCount;
+			Rect joystickRectRight = 		new Rect(Screen.width - (Screen.width/3), 0, 			   Screen.width/3, Screen.height/2);
+			Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/2);
+		
+		    // do joystick stuff
+			int count  = Input.touchCount;
+			guiVerticalInput = 0.0f;
+		
+			//GUILayout.Label("fingers on screen" + count.ToString());
+		
+			// check all fingers
+			for (var i = 0;  i < count;  i++)
+			{  
+				Touch touch = Input.GetTouch(i);
 				
+				// if joystick finger
 			
-				//GUILayout.Label("fingers on screen" + count.ToString());
-			
-				// check all fingers
-				for (var i = 0;  i < count;  i++)
-				{  
-					Touch touch = Input.GetTouch(i);
-					
-					// if joystick finger
+				// How ON earth does this touch zone start in the top right corner ????
+				if(joystickRect.Contains(touch.position))
+				{
 				
-					// How ON earth does this touch zone start in the top right corner ????
-					if(joystickRect.Contains(touch.position))
+					//GUILayout.Label("fingerposition" + touch.position.ToString());
+				
+					// and finger has moved
+					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
 					{
-					
-						//GUILayout.Label("fingerposition" + touch.position.ToString());
-					
-						// and finger has moved
-						if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+						if(touch.position.x < Screen.width/3)
 						{
-							if(touch.position.x < Screen.width/3)
-							{
-								// 210 (touch.position.x)  - (1800/2)/2 (450) = 10 
-								float turnAmount = touch.position.x - ((Screen.width/3)/2);
-								guiRotation = a.y + ((turnAmount/4) * Time.deltaTime);	
-							}
-						}
-					}
-					else if(joystickRectRight.Contains(touch.position))
-					{	
-						//GUILayout.Label("fingerposition" + touch.position.ToString());
-					
-						if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
-						{
-							guiVerticalInput = 1.0f;
-						}
-						else
-						{
-							guiVerticalInput = 0.0f;
+							// 210 (touch.position.x)  - (1800/2)/2 (450) = 10 
+							float turnAmount = touch.position.x - ((Screen.width/3)/2);
+							guiRotation = a.y + ((turnAmount/2) * Time.deltaTime);	
 						}
 					}
 				}
-	
-	
+				else if(joystickRectRight.Contains(touch.position))
+				{	
+					//GUILayout.Label("fingerposition" + touch.position.ToString());
+				
+					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+					{
+						guiVerticalInput = 1.0f;
+					}
+				}
+				else if(joystickRectRightFire.Contains(touch.position))
+				{	
+					//GUILayout.Label("fingerposition" + touch.position.ToString());
+				
+					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+					{
+						if(tempReloadTime < 0.0f)
+						{
+							GameObject bullet = PhotonNetwork.Instantiate("Bomfab", _transform.position + (spawnDistanceForward * _transform.forward)+ (spawnDistanceUp * _transform.up),_transform.rotation, 0);
+							BulletAi controller = bullet.GetComponent<BulletAi>();
+							controller.enabled = true;
+			
+							tempReloadTime = reloadTime;
+						}
+					}
+					
+				}
+			}
+
 			Vector3 guiMoveDirection = new Vector3(0,0,guiVerticalInput*forwardSpeed);
 		   	if(guiVerticalInput > 0.1)
 		   	{
-		   	   rigidbody.AddRelativeForce(guiMoveDirection,ForceMode.Acceleration);
+				if(_transform.rotation.x < 0.05f && _transform.rotation.x > -0.05f && _transform.rotation.z < 0.05f && _transform.rotation.z > -0.05f)
+				{
+		   		   _rigidbody.AddRelativeForce(guiMoveDirection,ForceMode.Acceleration);
+				}
 		   	}
 	
 			_transform.eulerAngles = new Vector3(a.x, guiRotation, a.z);

@@ -8,17 +8,40 @@ public class RandomMatchmakerCar : Photon.MonoBehaviour {
 	public static int playerScore = 0;
 	public static int enemyScore = 0;
 	
+	// cached objects
+	GameObject GUI_Score;
+	
+	
+	
 	// Dictionary to keep track of scores for multiplayer
 	public static Dictionary<int, int> scoreCount = new Dictionary<int, int>();
 	
 	void Start () {
 		PhotonNetwork.ConnectUsingSettings("0.2");
 		//PhotonNetwork.offlineMode = false;
+		
+		GUI_Score = GameObject.FindGameObjectWithTag("GUI_score");
 	}
 	
 	// Update is called once per frame
 	void OnGUI () {
-		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+		GUIStyle myStyle = new GUIStyle();
+		myStyle.fontSize = 20;
+		myStyle.normal.textColor = Color.red;
+		
+		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString(), myStyle);
+		
+		
+		if(GUI_Score != null)
+		{
+			if(GUI_Score.guiText.text.Equals("Waiting for other player") )
+			{
+				if(PhotonNetwork.room != null && PhotonNetwork.room.playerCount > 1)
+				{
+					GUI_Score.guiText.text = "Player entered the room";
+				}
+			}
+		}
 	}
 	
 	void OnJoinedLobby()
@@ -33,6 +56,9 @@ public class RandomMatchmakerCar : Photon.MonoBehaviour {
 	
 	void OnJoinedRoom()
 	{
+
+		
+		
 		var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		
 		// Add our player to the Room
