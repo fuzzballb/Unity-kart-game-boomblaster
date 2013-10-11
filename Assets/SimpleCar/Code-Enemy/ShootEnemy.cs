@@ -28,12 +28,10 @@ public class ShootEnemy : MonoBehaviour {
 			// Get all human players
 			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 			
-			RAINAgent ai = gameObject.GetComponent<RAINAgent>();
+			//RAINAgent ai = gameObject.GetComponent<RAINAgent>();
+			AIRig ai = gameObject.transform.Find("AI").GetComponent<AIRig>();
 			
-			
-			//ai.Agent.actionContext.SetContextItem<int>("ammo", ai.Agent.actionContext.GetContextItem<int>("ammo")-1);
-			
-			
+	
 			foreach(GameObject player in players)
 			{
 				var targetDir = player.transform.position - _transform.position;
@@ -41,7 +39,9 @@ public class ShootEnemy : MonoBehaviour {
 		        var angle = Vector3.Angle(targetDir, forward);
 				
 				// Get ammo count from AI
-				int ammo = ai.Agent.actionContext.GetContextItem<int>("ammo");
+			//	int ammo = ai.Agent.actionContext.GetContextItem<int>("ammo");
+				int ammo = ai.AI.WorkingMemory.GetItem<int>("ammo");
+				
 				
 		        if (angle < 5.0 && ammo > 0)
 				{
@@ -52,10 +52,10 @@ public class ShootEnemy : MonoBehaviour {
 					
 					tempReloadTime = reloadTime;
 					
-					Debug.Log( "AI ammo " + ammo);
+				//	Debug.Log( "AI ammo " + ammo);
 					// Set ammo count to AI
-					ai.Agent.actionContext.SetContextItem<int>("ammo", ammo-1);
-					
+				//	ai.Agent.actionContext.SetContextItem<int>("ammo", ammo-1);
+					ai.AI.WorkingMemory.SetItem<int>("ammo", ammo-1);
 				}
 			}
 		}

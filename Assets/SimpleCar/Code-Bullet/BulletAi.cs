@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using RAIN.Core;
+//using RAIN.Core;
 
 public class BulletAi : Photon.MonoBehaviour {
 	

@@ -18,7 +18,7 @@ public class ColliderPickUp : MonoBehaviour {
 	
 	
 	void OnTriggerEnter(Collider other) {
-		if(other.tag.Equals("EnemySphereCollider"))
+		if(other.tag.Equals("Enemy")) // BETA EnemySphereCollider
 		{
 			//http://support.rivaltheory.com/vanilla/index.php?p=/discussion/comment/1447#Comment_1447		
 			//http://support.rivaltheory.com/vanilla/index.php?p=/discussion/468/how-to-stop-a-moveto-operation-if-the-target-gameobject-is-destroyed/p1
@@ -29,11 +29,13 @@ public class ColliderPickUp : MonoBehaviour {
 			
 			// Reset the senses of the AI, after Decoration en Entity are removed
 			// to make shure the AI agent isn't holding a lock on the object
-			RAINAgent ai = other.transform.parent.gameObject.GetComponent<RAINAgent>();
-		//	ai.Agent.Mind.BeginSense();
+			//RAINAgent ai = other.transform.parent.gameObject.GetComponent<RAINAgent>();
+			AIRig ai = other.transform.Find("AI").GetComponent<AIRig>(); // updated to new RAIN indy
 			
 			// add Ammo to the AI character
-			ai.Agent.actionContext.SetContextItem<int>("ammo", ammo);
+			//ai.Agent.actionContext.SetContextItem<int>("ammo", ammo);
+			ai.AI.WorkingMemory.SetItem<int>("ammo", ammo); // updated to new RAIN indy
+			
 			
 			// destroy the game object after 0.2f seconds, zo the AI is done refreshing senses
 			StartCoroutine(WaitAndDestroy(0.3f));
@@ -54,7 +56,7 @@ public class ColliderPickUp : MonoBehaviour {
 			// Reset the senses of the AI, after Decoration en Entity are removed
 			// to make shure the AI agent isn't holding a lock on the object
 		//	RAINAgent ai = GameObject.FindGameObjectWithTag("Enemy").GetComponent<RAINAgent>();
-		//	ai.Agent.Mind.BeginSense();
+			AIRig ai = GameObject.FindGameObjectWithTag("Enemy").GetComponent<AIRig>();
 			
 			
 			// destroy the game object after 0.2f seconds, zo the AI is done refreshing senses

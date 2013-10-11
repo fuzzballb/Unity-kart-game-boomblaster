@@ -1,25 +1,26 @@
-﻿import RAIN.Action;
-import RAIN.Core;
+﻿import RAIN.Core;
+import RAIN.Action;
 
-class ActionTemplate_JS extends RAIN.Action.Action
+@RAINAction
+class ActionTemplate_JS extends RAIN.Action.RAINAction
 {
 	function newclass()
 	{
 		actionName = "ActionTemplate_JS";
 	}
 	
-	function Start(agent:Agent, deltaTime:float):ActionResult
+	function Start(ai:AI, deltaTime:float):void
+	{
+        super.Start(ai, deltaTime);
+	}
+
+	function Execute(ai:AI, deltaTime:float):ActionResult
 	{
         return ActionResult.SUCCESS;
 	}
 
-	function Execute(agent:Agent, deltaTime:float):ActionResult
+   	function Stop(ai:AI, deltaTime:float):void
 	{
-        return ActionResult.SUCCESS;
-	}
-
-   	function Stop(agent:Agent, deltaTime:float):ActionResult
-	{
-        return ActionResult.SUCCESS;
+        super.Stop(ai, deltaTime);
 	}
 }

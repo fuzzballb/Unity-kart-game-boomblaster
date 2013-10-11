@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using RAIN.Core;
+//using RAIN.Core;
 
 public class SingleMatch : Photon.MonoBehaviour {
 	
@@ -92,10 +92,10 @@ public class SingleMatch : Photon.MonoBehaviour {
 		var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 					
 		GameObject SimpleAICharacter = PhotonNetwork.Instantiate("SimpleAICharacterfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
-		RAINAgent AIController = SimpleAICharacter.GetComponent<RAINAgent>();
-		AIController.enabled = true;
-		ShootEnemy ShootControlerEnemy = SimpleAICharacter.GetComponent<ShootEnemy>();
-		ShootControlerEnemy.enabled = true;
+//		RAINAgent AIController = SimpleAICharacter.GetComponent<RAINAgent>();
+//		AIController.enabled = true;
+//		ShootEnemy ShootControlerEnemy = SimpleAICharacter.GetComponent<ShootEnemy>();
+//		ShootControlerEnemy.enabled = true;
 		
 		Debug.Log("done create new AI");
 		

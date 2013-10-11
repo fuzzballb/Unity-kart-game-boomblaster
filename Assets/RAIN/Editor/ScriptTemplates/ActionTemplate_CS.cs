@@ -4,25 +4,26 @@ using System.Collections.Generic;
 using RAIN.Core;
 using RAIN.Action;
 
-public class ActionTemplate_CS : RAIN.Action.Action
+[RAINAction]
+public class ActionTemplate_CS : RAINAction
 {
     public ActionTemplate_CS()
     {
         actionName = "ActionTemplate_CS";
     }
 
-    public override RAIN.Action.Action.ActionResult Start(RAIN.Core.Agent agent, float deltaTime)
+    public override void Start(AI ai, float deltaTime)
     {
-        return RAIN.Action.Action.ActionResult.SUCCESS;
+        base.Start(ai, deltaTime);
     }
 
-    public override RAIN.Action.Action.ActionResult Execute(RAIN.Core.Agent agent, float deltaTime)
+    public override ActionResult Execute(AI ai, float deltaTime)
     {
-        return RAIN.Action.Action.ActionResult.SUCCESS;
+        return ActionResult.SUCCESS;
     }
 
-    public override RAIN.Action.Action.ActionResult Stop(RAIN.Core.Agent agent, float deltaTime)
+    public override void Stop(AI ai, float deltaTime)
     {
-        return RAIN.Action.Action.ActionResult.SUCCESS;
+        base.Stop(ai, deltaTime);
     }
 }

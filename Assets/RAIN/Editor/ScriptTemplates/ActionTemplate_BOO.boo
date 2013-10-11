@@ -1,15 +1,18 @@
 ﻿import RAIN.Action
 import RAIN.Core
 
-class ActionTemplate_BOO(Action): 
+[RAINAction]
+class ActionTemplate_BOO(RAINAction): 
 	def constructor():
 		actionName = "ActionTemplate_BOO"
 
-	def Start(agent as Agent, deltaTime as decimal):
-		return ActionResult.SUCCESS
+	def Start(ai as AI, deltaTime as decimal):
+		super.Start(ai, deltaTime)
+		return
 	
-	def Execute(agent as Agent, deltaTime as decimal):
+	def Execute(ai as AI, deltaTime as decimal):
 		return ActionResult.SUCCESS
 
-	def Stop(agent as Agent, deltaTime as decimal):
-		return ActionResult.SUCCESS
+	def Stop(ai as AI, deltaTime as decimal):
+		super.Stop(ai, deltaTime)
+		return

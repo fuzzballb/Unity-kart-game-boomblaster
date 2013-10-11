@@ -52,32 +52,30 @@
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewPrefabApply.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\ServerSettingsInspector.cs" />
      <Compile Include="Assets\RAIN\Editor\ScriptTemplates\ActionTemplate_CS.cs" />
-     <None Include="Assets\AI\Resources\BehaviorTrees\simplemove.xml" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshGridShader.shader" />
      <None Include="Assets\Photon Unity Networking\readme.txt" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshColliderShader.shader" />
+     <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\SimpleCar\Resources\Models\ForkLift\forklift_read-me.txt" />
      <None Include="Assets\readme.txt" />
-     <None Include="Assets\AI\Resources\BehaviorTrees\complexmove.xml" />
-     <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\changelog.txt" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshContourShader.shader" />
  <Reference Include="Newtonsoft.Json">
  <HintPath>Assets\Photon Unity Networking\Editor\PhotonNetwork\Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Win8RT">
  <HintPath>Assets\Plugins\Photon3Win8RT.dll</HintPath>
  </Reference>
- <Reference Include="RAINIndie">
- <HintPath>Assets\RAIN\RAINIndie.dll</HintPath>
+ <Reference Include="RAIN">
+ <HintPath>Assets\RAIN\RAIN.dll</HintPath>
  </Reference>
- <Reference Include="Recast">
- <HintPath>Assets\RAIN\Recast.dll</HintPath>
+ <Reference Include="RAINMetaform">
+ <HintPath>Assets\RAIN\RAINMetaform.dll</HintPath>
  </Reference>
  <Reference Include="RAINEditor">
  <HintPath>Assets\RAIN\Editor\RAINEditor.dll</HintPath>
- </Reference>
- <Reference Include="RecastEditor">
- <HintPath>Assets\RAIN\Editor\RecastEditor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
