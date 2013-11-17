@@ -1,16 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\Code-Enemy\ShootEnemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleCar\SingleMatch.cs">
     <Files>
-      <File FileName="Assets\SimpleCar\Code-Enemy\ShootEnemy.cs" Line="49" Column="1" />
-      <File FileName="Assets\SimpleCar\Code-Level\ColliderPickUp.cs" Line="33" Column="4" />
-      <File FileName="Assets\SimpleCar\Code-Bullet\BulletAi.cs" Line="1" Column="1" />
-      <File FileName="Assets\SimpleCar\RandomMatchmakerCar.cs" Line="1" Column="1" />
-      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="1" Column="1" />
+      <File FileName="Assets\SimpleCar\Menu\Completed.cs" Line="4" Column="23" />
+      <File FileName="Assets\SimpleCar\SingleMatch.cs" Line="151" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
+          <Node name="Assembly-Boo-Editor" expanded="True" />
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Photon Unity Networking" expanded="True">
@@ -19,13 +17,10 @@
                 </Node>
               </Node>
               <Node name="SimpleCar" expanded="True">
-                <Node name="Code-AI" expanded="True" />
                 <Node name="Code-Bullet" expanded="True" />
                 <Node name="Code-Car" expanded="True" />
-                <Node name="Code-Enemy" expanded="True">
-                  <Node name="ShootEnemy.cs" selected="True" />
-                </Node>
-                <Node name="Code-Level" expanded="True" />
+                <Node name="Menu" expanded="True" />
+                <Node name="SingleMatch.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -38,6 +33,8 @@
               </Node>
             </Node>
           </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True" />
+          <Node name="Assembly-UnityScript-Editor" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -45,13 +42,18 @@
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
-          <Value>other.transform.gameObject</Value>
+          <Value>level</Value>
+          <Value>player.transform.position</Value>
+          <Value>player</Value>
+          <Value>GameObject.FindGameObjectWithTag("Player");</Value>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\abloemenkamp\Documents\GitHub\Unity-kart-game-boomblaster\Assets\SimpleCar\Menu\Menu.cs" line="25" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -31,9 +31,18 @@ public class CarDriver : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		// Add player to score dictionary using RPC call
-		PhotonView photonView = PhotonView.Get(this);
-		photonView.RPC("AddPlayer", PhotonTargets.AllBuffered , PhotonNetwork.player.ID, 10);
+		
+		if(PhotonNetwork.offlineMode)
+		{
+			// add players to local list for keeping score
+		}	
+		else
+		{
+			// Add player to score dictionary using RPC call
+			PhotonView photonView = PhotonView.Get(this);
+			photonView.RPC("AddPlayer", PhotonTargets.AllBuffered , PhotonNetwork.player.ID, 10);
+		}
+		
 		
 		_rigidbody = rigidbody;
 		
@@ -139,20 +148,7 @@ public class CarDriver : MonoBehaviour {
 			}
 		}
 		
-		// Check if jump key (SPACEBAR) is pressed to reset player to default position
-		/*
-		if (  Application.platform != RuntimePlatform.MetroPlayerX64 ||
-         Application.platform != RuntimePlatform.MetroPlayerX86 ||
-         Application.platform != RuntimePlatform.MetroPlayerARM)
-		{
-			if(Input.GetButtonDown("Fire1")){
-				_transform.position += Vector3.up;
-				rigidbody.velocity = Vector3.zero;
-				rigidbody.angularVelocity = Vector3.zero;
-				_transform.rotation = Quaternion.identity;
-			}
-		}
-		*/
+
 		
 		// Update audio according to the speed of the player
 		audio.pitch = _rigidbody.velocity.magnitude / 80 +1;

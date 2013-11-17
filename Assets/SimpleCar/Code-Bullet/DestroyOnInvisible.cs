@@ -12,7 +12,14 @@ public class DestroyOnInvisible : Photon.MonoBehaviour {
 		PhotonView myPhotonView = PhotonView.Get(gameObject);
 		if(myPhotonView.isMine)
 		{
-			PhotonNetwork.Destroy(gameObject);
+			if(PhotonNetwork.offlineMode)
+			{
+				Destroy(gameObject);
+			}
+			else
+			{
+				PhotonNetwork.Destroy(gameObject);
+			}
 		}
 
 	}

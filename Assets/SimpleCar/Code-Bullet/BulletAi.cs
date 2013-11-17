@@ -18,39 +18,72 @@ public class BulletAi : Photon.MonoBehaviour {
 	
 	void Update () {
 		// Destroy bullet when it is old
-		// TODO: add delta time, to make shure it stays alive the same amount of time on all clients
-		timeToLive--;
-		if(timeToLive <= 0.0f)
+		StartCoroutine(DestroyOverTime(2.0f));
+	}
+	
+	
+	IEnumerator DestroyOverTime(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+		
+		if(PhotonNetwork.offlineMode)
+		{
+			Destroy(gameObject);
+		}
+		else
 		{
 			PhotonNetwork.Destroy(gameObject);
 		}
 	}
-
+	
+	
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.CompareTag("Enemy"))
 		{
+			// instantiate eplosion effect
 			PhotonNetwork.Instantiate("ParticleFab", other.gameObject.transform.position, Quaternion.identity, 0);
+			
+			
 			// destroy the bullet
-			PhotonNetwork.Destroy(gameObject);
+			if(PhotonNetwork.offlineMode)
+			{
+				Destroy(gameObject);
+			}
+			else
+			{
+				PhotonNetwork.Destroy(gameObject);
+			}			
 			
-			
-			// destroy enemy game object, this is no problem for single player game
-			PhotonNetwork.Destroy(other.gameObject);
+			// destroy enemy game object
+			if(PhotonNetwork.offlineMode)
+			{
+				SingleMatch.objectsToHide.Remove(gameObject);
+				Destroy(other.gameObject);
+			}
+			else
+			{
+				PhotonNetwork.Destroy(other.gameObject);
+			}
 
 			
 			
-			
-			// Create new enemy game object	
-			Debug.Log("starting coroutine in main script");
-			SingleMatch rb = GameObject.Find("Scripts").GetComponent<SingleMatch>();
-			rb.CreateNewAI();
-			
-			//other.gameObject.transform.position = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position;
 
+			
 			if(Application.loadedLevelName.Equals("SinglePlayer"))
 			{
-				SingleMatch.playerScore++;
-				GameObject.FindGameObjectWithTag("GUI_score").guiText.text = SingleMatch.playerScore + " - " + SingleMatch.enemyScore;
+				//
+				// Create new enemy game object	
+				//
+				Debug.Log("starting coroutine in main script");
+				SingleMatch rb = GameObject.Find("Scripts").GetComponent<SingleMatch>();
+				rb.CreateNewAI(); // createNewAI could not be static
+				
+				//
+				// Opdate Scrore
+				//
+				rb.playerScore++;
+				rb.UpdateScore();
+				
+				
 			}
 		}
 		if(other.gameObject.CompareTag("Player"))
@@ -69,31 +102,35 @@ public class BulletAi : Photon.MonoBehaviour {
 			previousRandomSpawnNumber = randomSpawnNumber;
 			
 			
+			if(Application.loadedLevelName.Equals("SinglePlayer"))
+			{
+				SingleMatch rb = GameObject.Find("Scripts").GetComponent<SingleMatch>();
+				rb.enemyScore++;
+				rb.UpdateScore();
+			}
+			
+			
+			
+			
 			if(!otherPhotonView.isMine)
 			{
-			//	Debug.Log("otherPhotonView NOT mine");
+				//	Debug.Log("otherPhotonView NOT mine");
 				
 				// Add a particle prefab to show an explosion
 				// TODO: needs to be destroyed after effect
 				PhotonNetwork.Instantiate("ParticleFab", other.gameObject.transform.position, Quaternion.identity, 0);
 				
 				// Position and visibility, after respawn, needs to be set on other clients
+				// TODO: Only other player should have visibility to false
 				otherPhotonView.gameObject.transform.root.GetComponent<CarDriver>().visibility(false);
 				otherPhotonView.transform.position = spawnpoints[randomSpawnNumber].transform.position;
-				
-				if(Application.loadedLevelName.Equals("SinglePlayer"))
-				{
-					SingleMatch.enemyScore++;
-					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = SingleMatch.playerScore + " - " + SingleMatch.enemyScore;
-				}
-				else
-				{
-					// Update scoreboard
-					PhotonView carView = other.gameObject.transform.root.GetComponent<PhotonView>();
+				otherPhotonView.transform.rotation = spawnpoints[randomSpawnNumber].transform.rotation;
 
-					// Add a hit to the score to the car being hit
-					photonView.RPC("UpdateScore", PhotonTargets.AllBuffered, carView.owner.ID, 1);
-				}	
+				// Update scoreboard
+				PhotonView carView = other.gameObject.transform.root.GetComponent<PhotonView>();
+
+				// Add a hit to the score to the car being hit
+				photonView.RPC("UpdateScore", PhotonTargets.AllBuffered, carView.owner.ID, 1);
 			}
 			else
 			{
@@ -103,6 +140,7 @@ public class BulletAi : Photon.MonoBehaviour {
 				// had to remove bullet lerp to make shure this would always fire
 				other.gameObject.transform.root.GetComponent<CarDriver>().visibility(false);
 				other.gameObject.transform.position = spawnpoints[randomSpawnNumber].transform.position;
+				other.gameObject.transform.rotation = spawnpoints[randomSpawnNumber].transform.rotation;
 			}
 		}
     }

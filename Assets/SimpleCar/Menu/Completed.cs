@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class Completed : MonoBehaviour {
 	
 	//private Ray ray;
 	private RaycastHit hit;
@@ -10,7 +10,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	GameObject.Find("Loading").renderer.enabled = false;
+	//GameObject.Find("Loading").renderer.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -27,19 +27,12 @@ public class NewBehaviourScript : MonoBehaviour {
 			Color clr = new Color(0, 0, 1, 1);
 			if(Physics.Raycast(ray,out hit))
 			{
-				if(hit.transform.name.Equals("SinglePlayer"))
+				if(hit.transform.name.Equals("Menu"))
 				{
 					selection = true;
 					hit.collider.renderer.material.SetColor("_Color", clr);
 					
-					selectedSceneName = "SinglePlayer";
-				}
-				if(hit.transform.name.Equals("MultiPlayer"))
-				{
-					selection = true;
-					hit.collider.renderer.material.SetColor("_Color", clr);
-					
-					selectedSceneName = "MultiPlayer";
+					selectedSceneName = "Menu";
 				}
 			}
 		}
@@ -51,10 +44,6 @@ public class NewBehaviourScript : MonoBehaviour {
 			{
 				Color clr = new Color(0, 1, 1, 1);
 				hit.collider.renderer.material.SetColor("_Color", clr);
-				
-				GameObject.Find("Loading").renderer.enabled = true;
-				
-				
 				Application.LoadLevel(selectedSceneName);
 				selection = false;
 			}
@@ -62,14 +51,11 @@ public class NewBehaviourScript : MonoBehaviour {
 			{
 				Color clr = new Color(1, 1, 1, 1);
 				
-				GameObject objSinglePlayer = GameObject.Find("SinglePlayer");
-				GameObject objMultiPlayer = GameObject.Find("MultiPlayer");
-				
-				objSinglePlayer.collider.renderer.material.SetColor("_Color", clr);
-				objMultiPlayer.collider.renderer.material.SetColor("_Color", clr);
+				GameObject objMenu = GameObject.Find("Menu");
+				objMenu.collider.renderer.material.SetColor("_Color", clr);
 				
 				selection = false;
 			}
 		}
-	}
+	}	
 }

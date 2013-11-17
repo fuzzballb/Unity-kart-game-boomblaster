@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//using RAIN.Core;
+using RAIN.Core;
 
 public class RandomMatchmakerCar : Photon.MonoBehaviour {
 	// Use this for initialization
@@ -62,6 +62,11 @@ public class RandomMatchmakerCar : Photon.MonoBehaviour {
 		var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		
 		// Add our player to the Room
+		
+		// spawnpoints.Length not available
+		// 
+		// 
+		
 		var car = PhotonNetwork.Instantiate("CarPrefab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
 		CarDriver controller = car.GetComponent<CarDriver>();
 		controller.enabled = true;

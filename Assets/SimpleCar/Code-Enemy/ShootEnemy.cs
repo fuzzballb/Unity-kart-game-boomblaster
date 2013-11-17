@@ -8,13 +8,18 @@ public class ShootEnemy : MonoBehaviour {
 	public float spawnDistanceForward = 2.3f; // don't want the bullet spawn in centre
 	public float spawnDistanceUp = 1.0f;
 	public float reloadTime = 50.0f;
+	public float enemyShootAngle = 10.0f;
+	
 	private float tempReloadTime = 0.0f;
 	private Transform _transform;
 	
 	// Use this for initialization
 	void Start () {
-		tempReloadTime	=	reloadTime;
+		reloadTime = SingleMatch.enemyReloadTime;
+		enemyShootAngle = SingleMatch.enemyShootAngle;
 		
+		
+		tempReloadTime = reloadTime;
 		_transform = transform;
 	}
 	
@@ -41,9 +46,9 @@ public class ShootEnemy : MonoBehaviour {
 				// Get ammo count from AI
 			//	int ammo = ai.Agent.actionContext.GetContextItem<int>("ammo");
 				int ammo = ai.AI.WorkingMemory.GetItem<int>("ammo");
+			
 				
-				
-		        if (angle < 5.0 && ammo > 0)
+		        if (angle < enemyShootAngle && ammo > 0)
 				{
 					
 					GameObject bullet = PhotonNetwork.Instantiate("BomfabEnemy", _transform.position + (spawnDistanceForward * _transform.forward)+ (spawnDistanceUp * _transform.up),_transform.rotation, 0);

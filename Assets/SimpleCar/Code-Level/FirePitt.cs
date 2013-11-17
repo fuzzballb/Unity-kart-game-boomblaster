@@ -15,12 +15,15 @@ public class FirePitt : MonoBehaviour {
 			PhotonNetwork.Instantiate("ParticleFab", other.gameObject.transform.position, Quaternion.identity, 0);
 			
 			var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
-			other.gameObject.transform.position = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position;
+			int randomSpawnNumber = Random.Range(0,spawnpoints.Length);
+			other.gameObject.transform.position = spawnpoints[randomSpawnNumber].transform.position;
+			other.gameObject.transform.rotation = spawnpoints[randomSpawnNumber].transform.rotation;
 			
 			if(Application.loadedLevelName.Equals("SinglePlayer"))
 			{
-				SingleMatch.enemyScore--;
-				GameObject.FindGameObjectWithTag("GUI_score").guiText.text = SingleMatch.playerScore + " - " + SingleMatch.enemyScore;
+				SingleMatch rb = GameObject.Find("Scripts").GetComponent<SingleMatch>();
+				rb.enemyScore--;
+				rb.UpdateScore();
 			}
 		}
 		if(other.gameObject.CompareTag("Player"))
@@ -28,12 +31,15 @@ public class FirePitt : MonoBehaviour {
 			PhotonNetwork.Instantiate("ParticleFab", other.gameObject.transform.position, Quaternion.identity, 0);
 			
 			var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
-			other.gameObject.transform.position = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position;
+			int randomSpawnNumber = Random.Range(0,spawnpoints.Length);
+			other.gameObject.transform.position = spawnpoints[randomSpawnNumber].transform.position;
+			other.gameObject.transform.rotation = spawnpoints[randomSpawnNumber].transform.rotation;
 			
 			if(Application.loadedLevelName.Equals("SinglePlayer"))
 			{
-				SingleMatch.playerScore--;
-				GameObject.FindGameObjectWithTag("GUI_score").guiText.text = SingleMatch.playerScore + " - " + SingleMatch.enemyScore;
+				SingleMatch rb = GameObject.Find("Scripts").GetComponent<SingleMatch>();
+				rb.playerScore--;
+				rb.UpdateScore();
 			}
 		}
     }	
