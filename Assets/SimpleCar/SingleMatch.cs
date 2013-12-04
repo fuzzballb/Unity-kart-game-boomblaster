@@ -17,7 +17,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 	public  int currentEnemyPlayers = 1;
 	public  int desiredAmountOfEnemyPlayers = 1;
 	
-	public static bool connecting = false;
+	public bool connected = false;
 	private float amountOfTimeTillReAppear = 2.0f;
 	
 	// Added this list, because gameObject can't be found by tag if they are inactive
@@ -33,11 +33,11 @@ public class SingleMatch : Photon.MonoBehaviour {
 	void OnGUI () {
 	
 		// This is the single player scene, so don't create a real room
-		if(!connecting)
+		if(!connected)
 		{
 			PhotonNetwork.offlineMode = true;
 			PhotonNetwork.CreateRoom(null);
-			connecting = true;
+			connected = true;
 		}
 		
 		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
@@ -163,12 +163,15 @@ public class SingleMatch : Photon.MonoBehaviour {
 				var Pickup = GameObject.FindGameObjectWithTag("PickUp");
 				var Enemy = GameObject.FindGameObjectWithTag("Enemy");
 				var Explosion = GameObject.FindGameObjectWithTag("Explosion");
-				carObject.SetActive(false);
-				Pickup.SetActive(false);
-				Enemy.SetActive(false);
+			
+			//	Setting objects to ".SetActive(false);" couses Android build to stop working
+			//	
+			//	carObject.SetActive(false);
+			//	Pickup.SetActive(false);
+			//	Enemy.SetActive(false);
 			
 				
-				Explosion.particleSystem.enableEmission = false;
+			//	Explosion.particleSystem.enableEmission = false;
 				
 				level++;
 			}
@@ -429,10 +432,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 		{
 			try
 			{
-				obj.SetActive(true);
-			//	int randomSpawnNumber = Random.Range(0,spawnpoints.Length);
-			//	obj.transform.position = spawnpoints[randomSpawnNumber].transform.position;
-			//	obj.transform.rotation = spawnpoints[randomSpawnNumber].transform.rotation;
+			//	obj.SetActive(true);
 			}
 			catch(MissingReferenceException e)
 			{

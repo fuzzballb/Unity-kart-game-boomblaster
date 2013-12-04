@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CarDriver : MonoBehaviour {
+public class CarDriver : Photon.MonoBehaviour {
 	public float forwardSpeed = 5.0f;
 	public float backwardSpeed = 2.0f;
 	public float turnRate = 80.0f;
@@ -156,7 +156,9 @@ public class CarDriver : MonoBehaviour {
 		// Check if ESC key is pressed to leave game
 		if(Input.GetKey(KeyCode.Escape))
 		{
-			Application.Quit ();
+			PhotonNetwork.LeaveRoom();
+			PhotonNetwork.Disconnect();
+			Application.LoadLevel("Menu");
 		}
 		
 		
@@ -232,9 +234,14 @@ public class CarDriver : MonoBehaviour {
 
 		if (  Application.platform == RuntimePlatform.MetroPlayerX64 ||
          Application.platform == RuntimePlatform.MetroPlayerX86 ||
-         Application.platform == RuntimePlatform.MetroPlayerARM)
+         Application.platform == RuntimePlatform.MetroPlayerARM ||
+			Application.platform == RuntimePlatform.WP8Player ||
+			Application.platform == RuntimePlatform.IPhonePlayer ||
+			Application.platform == RuntimePlatform.Android)
 		{
-			Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height * 1.0f);
+			
+			Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height/2);
+			Rect joystickRectMenu = new Rect(0, Screen.height/2, Screen.width/3, Screen.height * 1.0f);
 			Rect joystickRectRight = 		new Rect(Screen.width - (Screen.width/3), 0, 			   Screen.width/3, Screen.height/2);
 			Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/2);
 		
@@ -249,7 +256,16 @@ public class CarDriver : MonoBehaviour {
 			{  
 				Touch touch = Input.GetTouch(i);
 				
-				// if joystick finger
+				// if joystick finger presses the back button
+				if(joystickRectMenu.Contains(touch.position))
+				{
+					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+					{
+						Application.LoadLevel("Menu");
+					}
+				}
+				
+				
 			
 				// How ON earth does this touch zone start in the top right corner ????
 				if(joystickRect.Contains(touch.position))
