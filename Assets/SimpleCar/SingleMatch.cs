@@ -60,11 +60,11 @@ public class SingleMatch : Photon.MonoBehaviour {
 		
 		var spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		
-		var pickup1 = PhotonNetwork.Instantiate("PickUpfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
+		var pickup1 = PhotonNetwork.Instantiate("PickUpfab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, spawnpoints[Random.Range(0,spawnpoints.Length)].transform.rotation, 0);
 		objectsToHide.Add(pickup1);
 		
 		
-		var car = PhotonNetwork.Instantiate("CarPrefab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, Quaternion.identity, 0);
+		var car = PhotonNetwork.Instantiate("CarPrefab", spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position, spawnpoints[Random.Range(0,spawnpoints.Length)].transform.rotation, 0);
 		objectsToHide.Add(car);
 		
 		CarCam camControler = car.GetComponent<CarCam>();
@@ -85,6 +85,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 		// choose a spawnpoint that is as far away from the player as possible
 		//
 		Vector3 emptyPosition = new Vector3();
+		Quaternion emptyRotation = new Quaternion();
 		float distance = 0.0f;
 		
 		if(player != null)
@@ -99,6 +100,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				{
 					distance = distanceToPlayer;
 					emptyPosition = spawnPosition;
+					emptyRotation = spawnpoint.transform.rotation;
 				}
 			}
 		}
@@ -106,11 +108,12 @@ public class SingleMatch : Photon.MonoBehaviour {
 		{
 			// When the level switches, the player cant be found by tag, because the player is is not active
 			emptyPosition = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.position;
+			emptyRotation = spawnpoints[Random.Range(0,spawnpoints.Length)].transform.rotation;
 		}
 		
 		
 		
-		GameObject SimpleAICharacter = PhotonNetwork.Instantiate("SimpleAICharacterfab", emptyPosition, Quaternion.identity, 0);		
+		GameObject SimpleAICharacter = PhotonNetwork.Instantiate("SimpleAICharacterfab", emptyPosition, emptyRotation, 0);		
 		objectsToHide.Add(SimpleAICharacter);
 
 		Debug.Log("done create new AI");
