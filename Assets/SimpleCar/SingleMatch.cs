@@ -20,6 +20,8 @@ public class SingleMatch : Photon.MonoBehaviour {
 	public bool connected = false;
 	private float amountOfTimeTillReAppear = 2.0f;
 	
+	private static GameObject LevelImage;
+	
 	// Added this list, because gameObject can't be found by tag if they are inactive
 	public static List<GameObject> objectsToHide = new List<GameObject>();
 	
@@ -27,6 +29,11 @@ public class SingleMatch : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		PhotonNetwork.ConnectUsingSettings("0.3"); // make sure this ID is different form the multiplayer ID
+		
+		LevelImage = GameObject.FindGameObjectWithTag("LevelImage");
+		//LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/sunshine", typeof(Texture)) as Texture;
+
+//LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/alien", typeof(Texture)) as Texture;
 	}
 	
 	// Update is called once per frame
@@ -48,7 +55,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 		// start adding players to the room
 		StartCoroutine(WaitAndCreatePlayer(1.0f));
 		StartCoroutine(hideLevelText(2.0f));
-		StartCoroutine(WaitAndCreateAI(3.0f)); // make shure this is called after "amountOfTimeTillReAppear"
+		StartCoroutine(WaitAndCreateAI(0.0f)); // make shure this is called after "amountOfTimeTillReAppear"
 	
 		
 		GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
@@ -151,7 +158,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 		*/
 		
 		
-		if(playerScore >= 3 || enemyScore >= 3)
+		if(playerScore >= 1 || enemyScore >= 3)
 		{
 			if(enemyScore >= 3)
 			{
@@ -189,6 +196,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				case 1: // first environment 1 enemy
 				{
 					desiredAmountOfEnemyPlayers = 1;
+					StartCoroutine(hideLevelText(2.0f));
 					break;
 				}
 				case 2: // first environment 1 enemy
@@ -196,6 +204,8 @@ public class SingleMatch : Photon.MonoBehaviour {
 					// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
 					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					LevelImage.SetActive(true);
+					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/fog", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
 		
 		//
@@ -240,6 +250,8 @@ public class SingleMatch : Photon.MonoBehaviour {
 					// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
 					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					LevelImage.SetActive(true);
+					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/sunset", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
 		
 		//
@@ -286,6 +298,8 @@ public class SingleMatch : Photon.MonoBehaviour {
 									// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
 					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+				LevelImage.SetActive(true);
+					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/snow", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
 		//
 		//	Snow
@@ -331,6 +345,8 @@ public class SingleMatch : Photon.MonoBehaviour {
 													// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
 					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+				LevelImage.SetActive(true);
+					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/night", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
 		//
 		//	Night
@@ -375,6 +391,8 @@ public class SingleMatch : Photon.MonoBehaviour {
 													// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
 					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+				LevelImage.SetActive(true);
+					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/alien", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
 		//
 		//	Alien
@@ -448,6 +466,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 	IEnumerator hideLevelText(float waitTime) {
         yield return new WaitForSeconds(waitTime);
 		GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "";
+		LevelImage.SetActive(false);
 		
 	}
 	

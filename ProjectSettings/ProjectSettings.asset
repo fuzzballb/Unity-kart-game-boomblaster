@@ -157,7 +157,10 @@ PlayerSettings:
   ps3SaveGameSlots: 1
   ps3TrialMode: 0
   flashStrippingLevel: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    data:
+      first: 7
+      second: 
   metroPackageName: phantomTutorial
   metroPackageLogo: 
   metroPackageVersion: 1.0.0.0

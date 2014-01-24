@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_2_0;UNITY_4_2;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_2_0;UNITY_4_2;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -44,19 +44,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\FXLab\Scripts\Editor\CopyWaterMaterialEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXCameraEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXCaptureScreenEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXMaterialEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXMaterialHelper.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXPostProcessEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXRenderTextureEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXTextureAssignerEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\FXTextureEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\GlassMaterialEditor.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\LayerDrawer.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\Templater.cs" />
-     <Compile Include="Assets\FXLab\Scripts\Editor\WaterMaterialEditor.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\AccountService.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonConverter.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonEditor.cs" />
@@ -65,96 +52,16 @@
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewPrefabApply.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\ServerSettingsInspector.cs" />
      <Compile Include="Assets\RAIN\Editor\ScriptTemplates\ActionTemplate_CS.cs" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Refraction_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\FXLab.cginc" />
-     <None Include="Assets\FXLab\Shader\Water\Water.cginc" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Refraction_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Glass\Refraction.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Refraction_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Refraction_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Glass\Refraction_Dispersion.shader" />
      <None Include="Assets\RAIN\Editor\Shaders\NavMeshGridShader.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\Luminance.shader" />
-     <None Include="Assets\FXLab\readme.txt" />
-     <None Include="Assets\FXLab\Shader\Water\Refraction_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\Noise.shader" />
-     <None Include="Assets\FXLab\Shader\Shockwave\Shockwave.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection.shader" />
      <None Include="Assets\Photon Unity Networking\readme.txt" />
-     <None Include="Assets\FXLab\Shader\Distortion.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\DepthOfField.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\SSAO.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Refraction_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Refraction_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\UnderWater.shader" />
      <None Include="Assets\RAIN\Editor\Shaders\NavMeshColliderShader.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\Scanlines.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Dispersion.shader" />
      <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\Pixelize.shader" />
-     <None Include="Assets\FXLab\Shader\Glass\Refraction_Blurred.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Particles\Alpha.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Refraction_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Dispersion.shader" />
      <None Include="Assets\SimpleCar\Resources\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Refraction_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Glass\Simple.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Refraction_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Dispersion.shader" />
-     <None Include="Assets\FXLab\Samples\Shader\FireBall.shader" />
-     <None Include="Assets\FXLab\Shader\Glass\Refraction_Dispersion_Blurred.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\Bloom.shader" />
-     <None Include="Assets\FXLab\Resources\Shader\DisplayFloatTexture.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Refraction_Decal.shader" />
-     <None Include="Assets\FXLab\Resources\Shader\WorldNormal.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\Vignette.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Refraction_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Refraction.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Refraction.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Refraction_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Refraction_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Refraction.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Refraction.shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
-     <None Include="Assets\FXLab\Resources\Shader\DisplayTexture.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Decal.shader" />
-     <None Include="Assets\FXLab\Resources\Shader\PreciseGrabHeight.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Refraction.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Refraction_Dispersion_Decal.shader" />
      <None Include="Assets\SimpleCar\Resources\Models\ForkLift\forklift_read-me.txt" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Refraction_Dispersion.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Refraction_Dispersion.shader" />
-     <None Include="Assets\FXLab\Resources\Shader\PreciseGrabDepth.shader" />
      <None Include="Assets\readme.txt" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\MotionBlur.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Simple.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_FlowMap_Reflection_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\DisplayTexture.shader" />
-     <None Include="Assets\FXLab\Samples\Shader\BlackHoleDiffuse.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Particles\Add.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Depth_Reflection_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\LightShafts.shader" />
-     <None Include="Assets\FXLab\Shader\Water\Reflection_Refraction.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Refraction_Dispersion_Decal.shader" />
-     <None Include="Assets\FXLab\Shader\Water\FlowMap_Reflection_Dispersion_Decal.shader" />
      <None Include="Assets\changelog.txt" />
      <None Include="Assets\RAIN\Editor\Shaders\NavMeshContourShader.shader" />
-     <None Include="Assets\FXLab\Shader\PostProcessing\SSAA.shader" />
  <Reference Include="Newtonsoft.Json">
  <HintPath>Assets\Photon Unity Networking\Editor\PhotonNetwork\Newtonsoft.Json.dll</HintPath>
  </Reference>
