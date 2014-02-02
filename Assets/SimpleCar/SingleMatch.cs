@@ -58,7 +58,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 		StartCoroutine(WaitAndCreateAI(0.0f)); // make shure this is called after "amountOfTimeTillReAppear"
 	
 		
-		GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+		GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Sunny";
 		
 	}
 
@@ -158,7 +158,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 		*/
 		
 		
-		if(playerScore >= 1 || enemyScore >= 3)
+		if(playerScore >= 3 || enemyScore >= 3)
 		{
 			if(enemyScore >= 3)
 			{
@@ -203,7 +203,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				{
 					// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
-					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Fog";
 					LevelImage.SetActive(true);
 					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/fog", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
@@ -249,7 +249,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				
 					// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
-					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Evening";
 					LevelImage.SetActive(true);
 					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/sunset", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
@@ -297,7 +297,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				{
 									// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
-					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Snow";
 				LevelImage.SetActive(true);
 					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/snow", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
@@ -344,7 +344,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				
 													// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
-					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Night";
 				LevelImage.SetActive(true);
 					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/night", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));
@@ -390,7 +390,7 @@ public class SingleMatch : Photon.MonoBehaviour {
 				
 													// show level text
 					GameObject.FindGameObjectWithTag("GUI_score").guiText.text = "0 - 0";
-					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Level " + level;
+					GameObject.FindGameObjectWithTag("GUI_Level").guiText.text = "Alien";
 				LevelImage.SetActive(true);
 					LevelImage.guiTexture.texture = (Texture)Resources.Load("levelImages/alien", typeof(Texture)) as Texture;
 					StartCoroutine(hideLevelText(2.0f));

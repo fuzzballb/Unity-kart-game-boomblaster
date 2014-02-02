@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 108.406639, y: 475.830322, z: -44.4792671}
+  m_LocalPosition: {x: 907.497498, y: 92.056694, z: -910.949219}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 400008}
@@ -489,9 +489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a0f4f114b79ca499530fec838de96b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 120
-  backwardSpeed: 50
-  turnRate: 80
+  forwardSpeed: 0
+  maxForwardSpeed: 150
+  maxBackwardSpeed: -70
   timeToReappear: 100
   lowestGroudObject: {fileID: 0}
   respawnPosition: {fileID: 400000, guid: 8c59d1f803ed2474eb41701e76ae1b34, type: 2}

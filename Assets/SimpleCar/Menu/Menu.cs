@@ -13,8 +13,16 @@ public class Menu : MonoBehaviour {
 		GameObject.Find("Loading").renderer.enabled = false;
 	}
 	
+
+	
+	
 	// Update is called once per frame
 	void Update () {
+		
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+    	  Application.Quit();
+		}
 		
 		// Only select a scene when the mouse is on the text at mouse down and up,
 		// therefore giving the user the ability to move away from the link and cancel

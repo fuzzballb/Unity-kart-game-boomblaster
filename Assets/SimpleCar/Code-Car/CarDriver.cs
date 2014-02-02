@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class CarDriver : Photon.MonoBehaviour {
-	public float forwardSpeed = 5.0f;
-	public float backwardSpeed = 2.0f;
-	public float turnRate = 80.0f;
+	public float forwardSpeed = 0.0f;
+	public float maxForwardSpeed = 150.0f;
+	public float maxBackwardSpeed = -70.0f;
 	
 	public float timeToReappear = 100.0f;
 	public static bool playerShot = false;
@@ -61,38 +61,20 @@ public class CarDriver : Photon.MonoBehaviour {
 	
 	void OnGUI () {
 		
-	//	float horizRatio = Screen.width / 1024.0f;
-	//	float vertRatio = Screen.height / 768.0f;
-	//	var tOffset = new Vector3 (0, 0, 0);
-	//	var tRotation = Quaternion.identity;
-	//	var tScale = new Vector3(horizRatio, vertRatio, 1.0f);
-	//	var tMatrix = Matrix4x4.TRS(tOffset, tRotation, tScale);
-	//	GUI.matrix = tMatrix;
-
+			Rect joystickRect = 			new Rect(0, 0, Screen.width/3, Screen.height/2);
+			Rect joystickRectMenu = 		new Rect(0, Screen.height/2, Screen.width/3, Screen.height * 1.0f);
 		
-		// Make a background box
-	#if UNITY_METRO
+											// start punt - hoe groot
+			Rect joystickRectRight = 		new Rect(Screen.width - (Screen.width/3), Screen.height/2.7f, Screen.width/3, Screen.height/8);
+			Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/2);
+			Rect joystickRectRightBrake =   new Rect(Screen.width - (Screen.width/3), Screen.height/4.1f, Screen.width/3, Screen.height/8);	
 		
-		
-		
-		
-	//	Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height * 1.0f);
-	//	Rect joystickRectRight = 		new Rect(Screen.width - (Screen.width/3), 0, 			   Screen.width/3, Screen.height/2);
-	//	Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/2);
-			
-	//	GUI.Box(joystickRect, "");
-	//	GUI.Box(joystickRectRight, "");
-	//	GUI.Box(joystickRectRightFire, "");
-		
-		//GUI.Box(new Rect(10,950,Screen.width/3,100), "");
-		//GUI.Box(new Rect(1700,950,160,100), "");
-	#endif	
-
-		
-
-		
-		
-
+			// debug
+			GUI.Box(joystickRect, "Steering");
+			GUI.Box(joystickRectMenu, "Menu");
+			GUI.Box(joystickRectRight, "Right");
+			GUI.Box(joystickRectRightFire, "RightFire");
+			GUI.Box(joystickRectRightBrake, "RightBrake");
 	}
 	
 	
@@ -189,68 +171,90 @@ public class CarDriver : Photon.MonoBehaviour {
 	// fixed timing, Physics uses this instead of normal update for more consistand simulation
 	// TODO: check if Time.deltaTime isn't always the same in Fixed update.
 	void FixedUpdate(){
-	   float horizontalInput = Input.GetAxis("Horizontal");
-	   float verticalInput = Input.GetAxis("Vertical");
-	 
-	   Vector3 a = _transform.eulerAngles;
-	 
-	   float rotation= 0; 
-		
-	   if(horizontalInput > 0.1)
-		{
-	      rotation= a.y + (10.0f  * Time.deltaTime * 10);
-			
-	      _transform.eulerAngles = new Vector3(a.x, rotation, a.z);
-		}
-	   else if(horizontalInput < 0)
-		{
-		  rotation= a.y - (10.0f  * Time.deltaTime * 10);	
-	      _transform.eulerAngles = new Vector3(a.x, rotation, a.z);
-		}
-	 
-	   Vector3 moveDirection = new Vector3(0,0,verticalInput*forwardSpeed);
-	 
+		// Cool downs for Player weapon
+		tempReloadTime -= 10.0f * Time.deltaTime;
 		
 		
-		
-		//Debug.Log(" x " +  transform.rotation.x + " y " +  transform.rotation.y + " z " +  transform.rotation.z  );
-		
-		
-	   if(verticalInput > 0.1)
-	   {
+		float horizontalInput = Input.GetAxis("Horizontal");
+		float verticalInput = Input.GetAxis("Vertical");
 
-			if(_transform.rotation.x < 0.05f && _transform.rotation.x > -0.05f && _transform.rotation.z < 0.05f && _transform.rotation.z > -0.05f)
+		// Accelerate forward or Backwards
+		if(verticalInput > 0.0) // Forwards
+		{
+			if(forwardSpeed < maxForwardSpeed)
 			{
-	      		_rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
+				forwardSpeed += 10.0f;
 			}
-	   }
+		}
+		if(verticalInput < 0.0) // Backwards
+		{
+			if(forwardSpeed > maxBackwardSpeed)
+			{
+				forwardSpeed -= 10.0f;
+			}
+		}
+		if(verticalInput == 0) // come to a halt
+		{
+			if(forwardSpeed > 0)
+			{
+				forwardSpeed -= 10.0f;
+			}
+			else if(forwardSpeed < 0)
+			{
+				forwardSpeed += 10.0f;
+			}
+		}
+		
+		Vector3 moveDirection = new Vector3(0,0,forwardSpeed);
+		if(_transform.rotation.x < 0.05f && _transform.rotation.x > -0.05f && _transform.rotation.z < 0.05f && _transform.rotation.z > -0.05f)
+		{
+	  		_rigidbody.AddRelativeForce(moveDirection,ForceMode.Acceleration);
+		}
+		
+		// Rotate left of right
+		Vector3 a = _transform.eulerAngles;
+		
+		float rotation= 0;
+		if(horizontalInput > 0)
+		{
+		  rotation= a.y + ((forwardSpeed/2.0f)  * Time.deltaTime);
+			_transform.eulerAngles = new Vector3(a.x, rotation, a.z);
+		}
+		else if(horizontalInput < 0)
+		{
+		  rotation= a.y - ((forwardSpeed/1.5f) * Time.deltaTime);	
+			_transform.eulerAngles = new Vector3(a.x, rotation, a.z);
+		}
+		
+	
+		
+
+		
 
 		
 		
-				// Cool downs for Player weapon
-			tempReloadTime -= 10.0f * Time.deltaTime;
-		
-		
 
-		if (  Application.platform == RuntimePlatform.MetroPlayerX64 ||
-         Application.platform == RuntimePlatform.MetroPlayerX86 ||
-         Application.platform == RuntimePlatform.MetroPlayerARM ||
-			Application.platform == RuntimePlatform.WP8Player ||
-			Application.platform == RuntimePlatform.IPhonePlayer ||
-			Application.platform == RuntimePlatform.Android)
+		if (  	Application.platform == RuntimePlatform.MetroPlayerX64 ||
+         		Application.platform == RuntimePlatform.MetroPlayerX86 ||
+         		Application.platform == RuntimePlatform.MetroPlayerARM ||
+				Application.platform == RuntimePlatform.WP8Player ||
+				Application.platform == RuntimePlatform.IPhonePlayer ||
+				Application.platform == RuntimePlatform.Android)
 		{
 			
-			Rect joystickRect = new Rect(0, 0, Screen.width/3, Screen.height/2);
-			Rect joystickRectMenu = new Rect(0, Screen.height/2, Screen.width/3, Screen.height * 1.0f);
+			Rect joystickRect = 			new Rect(0, 0, Screen.width/3, Screen.height/2);
+			Rect joystickRectMenu = 		new Rect(0, Screen.height/2, Screen.width/3, Screen.height * 1.0f);
 			Rect joystickRectRight = 		new Rect(Screen.width - (Screen.width/3), 0, 			   Screen.width/3, Screen.height/2);
-			Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/2);
+			Rect joystickRectRightFire =    new Rect(Screen.width - (Screen.width/3), Screen.height/2, Screen.width/3, Screen.height/8);
+			Rect joystickRectRightBrake =   new Rect(Screen.width - (Screen.width/3), Screen.height/1.61f, Screen.width/3, Screen.height/8);	
 		
+			
+			
+			
 		    // do joystick stuff
 			int count  = Input.touchCount;
 			guiVerticalInput = 0.0f;
-		
-			//GUILayout.Label("fingers on screen" + count.ToString());
-		
+
 			// check all fingers
 			for (var i = 0;  i < count;  i++)
 			{  
@@ -270,15 +274,11 @@ public class CarDriver : Photon.MonoBehaviour {
 				// How ON earth does this touch zone start in the top right corner ????
 				if(joystickRect.Contains(touch.position))
 				{
-				
-					//GUILayout.Label("fingerposition" + touch.position.ToString());
-				
 					// and finger has moved
 					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
 					{
 						if(touch.position.x < Screen.width/3)
 						{
-							// 210 (touch.position.x)  - (1800/2)/2 (450) = 10 
 							float turnAmount = touch.position.x - ((Screen.width/3)/2);
 							guiRotation = a.y + ((turnAmount/2) * Time.deltaTime);	
 						}
@@ -286,17 +286,22 @@ public class CarDriver : Photon.MonoBehaviour {
 				}
 				else if(joystickRectRight.Contains(touch.position))
 				{	
-					//GUILayout.Label("fingerposition" + touch.position.ToString());
-				
 					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
 					{
 						guiVerticalInput = 1.0f;
 					}
 				}
+				
+				else if(joystickRectRightBrake.Contains(touch.position))
+				{	
+					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+					{
+						guiVerticalInput = -1.0f;
+					}
+				}
+				
 				else if(joystickRectRightFire.Contains(touch.position))
 				{	
-					//GUILayout.Label("fingerposition" + touch.position.ToString());
-				
 					if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
 					{
 						if(tempReloadTime < 0.0f)
@@ -308,7 +313,6 @@ public class CarDriver : Photon.MonoBehaviour {
 							tempReloadTime = reloadTime;
 						}
 					}
-					
 				}
 			}
 
@@ -321,6 +325,7 @@ public class CarDriver : Photon.MonoBehaviour {
 				}
 		   	}
 	
+			// this works but is not the right way to do it. 
 			_transform.eulerAngles = new Vector3(a.x, guiRotation, a.z);
 		}
 		
